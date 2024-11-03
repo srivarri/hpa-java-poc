@@ -1,0 +1,10 @@
+lowercaseOutputName: true
+rules:
+  - pattern: "java.lang<type=Memory><attribute=HeapMemoryUsage><>(used)"
+    name: "jvm_memory_used_bytes"
+    labels: {}
+    type: GAUGE
+  - pattern: "java.lang<type=Memory><attribute=HeapMemoryUsage><>(max)"
+    name: "jvm_memory_max_bytes"
+    labels: {}
+    type: GAUGE

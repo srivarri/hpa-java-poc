@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-app
+  template:
+    metadata:
+      labels:
+        app: java-app
+    spec:
+      containers:
+        - name: java-app
+          image: savipavan/hpa-java-app:latest  # Replace with your Docker registry
+          ports:
+            - containerPort: 8080
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-javaagent:/app/jmx_prometheus_javaagent.jar=8080:/app/jmx_exporter_config.yaml"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-app-service
+  namespace: default
+spec:
+  selector:
+    app: java-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: java-app-hpa
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: java-app
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Pods
+      pods:
+        metric:
+          name: jvm_memory_used_bytes
+        target:
+          type: AverageValue
+          averageValue: 500Mi  # Set the memory threshold as needed
