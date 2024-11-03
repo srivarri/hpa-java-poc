@@ -21,3 +21,9 @@ Increase Memory Usage: The application will add 10 MB to memory every 2 seconds 
 Release Memory: After a set period (20 seconds in this case), the code will clear memoryConsumers and call System.gc() to suggest garbage collection, releasing the memory.
 Pause: After clearing memory, the app waits for 30 seconds before repeating the memory spike.
 
+-----
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+-----
+
