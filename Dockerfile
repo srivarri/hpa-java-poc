@@ -1,5 +1,5 @@
 # Use a base Java image
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jre-slim
 
 # Copy your Java app
 COPY app.jar /app/app.jar
