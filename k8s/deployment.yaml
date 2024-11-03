@@ -59,3 +59,6 @@ spec:
         target:
           type: AverageValue
           averageValue: 500Mi  # Set the memory threshold as needed
+        selector:
+          matchLabels:
+            area: "heap"
