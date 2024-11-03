@@ -1,6 +1,12 @@
 # Use a base Java image
 FROM openjdk:17.0.1-jdk-slim
 
+# Install necessary utilities
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    procps \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy your Java app
 COPY app.jar /app/app.jar
 
