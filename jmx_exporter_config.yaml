@@ -1,25 +1,30 @@
 rules:
-  - pattern: ".*"
+  - pattern: "java.lang:type=Memory"
     name: "jvm_memory_used_bytes"
     type: GAUGE
     help: "Used JVM Heap Memory"
     labels:
       area: "heap"
-      type: "used"
-    attr: "Used"
-  - pattern: ".*"
+    attr:
+      HeapMemoryUsage:
+        used: "used"
+
+  - pattern: "java.lang:type=Memory"
     name: "jvm_memory_committed_bytes"
     type: GAUGE
     help: "Committed JVM Heap Memory"
     labels:
       area: "heap"
-      type: "committed"
-    attr: "Committed"
-  - pattern: ".*"
+    attr:
+      HeapMemoryUsage:
+        committed: "committed"
+
+  - pattern: "java.lang:type=Memory"
     name: "jvm_memory_max_bytes"
     type: GAUGE
     help: "Max JVM Heap Memory"
     labels:
       area: "heap"
-      type: "max"
-    attr: "Max"
+    attr:
+      HeapMemoryUsage:
+        max: "max"
